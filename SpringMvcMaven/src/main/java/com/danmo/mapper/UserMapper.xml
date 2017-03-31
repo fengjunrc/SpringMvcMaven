@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.danmo.dao.UserMapper">    
+	<select id="queryList" resultType="com.danmo.model.User">
+		select * from sysuser limit 10
+	</select>
+	
+	<select id="queryByName" resultType="com.danmo.model.User">
+		select * from sysuser where username =#{username}
+	</select>
+	
+	
+	<insert id="insert">
+		insert into sysuser(username,password)values(#{username},#{password})
+	</insert>
+	
+	
+	<select id="selectUserByUserName" parameterType="java.lang.String" resultType="com.danmo.model.User">  
+	    SELECT *  
+	    FROM sysuser  
+	    WHERE 1 = 1  
+	    <if test="username != null and username !=''">  
+	        AND username = #{username,jdbcType=VARCHAR}  
+	    </if>  
+	    ORDER BY id  
+	</select>  
+	
+	
+	<update id="update">
+		update sysuser set username=#{username},password=#{password} where id=#{id}
+	</update>
+	
+	<insert id="addUser">
+		insert into sysuser(username,password)values(#{username},#{password})
+	</insert>
+</mapper>
